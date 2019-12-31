@@ -1,32 +1,35 @@
 # URL Shortener
 
-Api para acortar URLs en función de una estrategia dada. No se han realizado o tenido en cuenta los
-- Funcionalidad de añadir nuevos usuarios, por lo que hay que usar el existente (john.doe).
-
-
+Api para acortar URLs en función de una estrategia dada.
 
 ## Puesta en marcha
 
-1. Ejecutar el siguiente comando, desde la carpeta del proyecto
+1. Clonar el repositorio
 ```sh
-sudo docker-compose up -d --build
+git clone https://github.com/ivan-iglesias/url-shortener.git
 ```
 
-2. Accedemos al contenedor donde se encuentra php
+2. Acceder a la carpeta del proyecto `url-shortener`
+
+3. Crear la carpeta `mysql`
+
+4. Creamos los contenedores
 ```sh
-sudo docker exec -it  urlshortener_php_1 bash
+docker-compose up -d --build
 ```
 
-3. Instalamos las dependencias
+5. Accedemos al contenedor en el que se encuentra php
+```sh
+docker exec -it  urlshortener_php_1 bash
+```
+
+6. Dentro del contenedor, instalamos las dependencias y creamos la base de datos con los datos de prueba
 ```sh
 composer install
-```
 
-3. Creamos la base de datos con los datos de prueba
-```sh
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load --no-interaction
 ```
 
 ## Probando el API
